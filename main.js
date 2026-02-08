@@ -2,33 +2,73 @@ const yesButton = document.querySelector(".yes");
 const noButton = document.querySelector(".no");
 const responseSection = document.querySelector(".response");
 const firstContainer = document.querySelector(".first");
+const wmax = window.innerWidth - noButton.offsetWidth;
+const hmax = window.innerHeight - noButton.offsetHeight;
+const message = document.querySelector(".message");
+const body = document.body;
+const main = document.querySelector("main");
 
 document.addEventListener("DOMContentLoaded", () => {
   responseSection.style.display = "none";
 });
 
+function launchConfetti() {
+  for (let i = 0; i < 40; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+    confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 4000);
+  }
+}
+
 yesButton.addEventListener("click", (e) => {
   responseSection.style.display = "block";
   firstContainer.style.display = "none";
+  launchConfetti();
 });
+
+function showMessage(text) {
+  message.textContent = text;
+
+  message.classList.remove("animate");
+  void message.offsetWidth;
+  message.classList.add("animate");
+}
+
+function error404() {
+  showMessage("Error 404: Message not found!");
+  main.style.display = "none";
+  body.classList.add("error404");
+}
 
 let counter = 0;
 noButton.addEventListener("mouseenter", (e) => {
   counter++;
 
   if (counter === 5) {
-    alert("Please click the YES button!");
+    showMessage("Please click the YES button!");
   } else if (counter === 7) {
-    alert("Don't be shy, click the YES button!");
+    showMessage("Don't be shy, click the YES button!");
+    yesButton.classList.add("action");
   } else if (counter === 10) {
-    alert("There is no option!");
+    showMessage("There is no option!");
   } else if (counter === 15) {
-    alert("I'm getting tired of moving the NO button!");
+    showMessage("I'm getting tired of moving the NO button!");
   } else if (counter === 20) {
-    alert("Don't you love me? click the YES button!");
+    showMessage("Don't you love me? Click the Yes button!");
+  } else if (counter > 25) {
+    showMessage("Okay, I quit! You win!");
+    setTimeout(error404, 2000);
+
     counter = 0;
   }
   noButton.style.position = "absolute";
-  noButton.style.left = Math.random() * 500 + "px";
-  noButton.style.top = Math.random() * 600 + "px";
+  noButton.style.left = Math.random() * wmax + "px";
+  noButton.style.top = Math.random() * hmax + "px";
 });

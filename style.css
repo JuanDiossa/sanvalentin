@@ -1,7 +1,10 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
   background-color: #670301;
 
   display: flex;
@@ -12,6 +15,24 @@ body {
   font-family: "Great Vibes", cursive;
 }
 
+.error404 {
+  background-image: url("broken-heart.svg");
+  background-size: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+
+  &::before {
+    content: "I'm disappointed...😭";
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    font-size: 8rem;
+    animation: popIn 0.5s ease;
+    color: #670301;
+  }
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -19,7 +40,7 @@ body {
   flex-direction: column;
   background-color: hsl(324, 100%, 99%);
   height: 500px;
-  width: 500px;
+  width: 750px;
   margin: 0 auto;
 
   border-radius: 20px;
@@ -28,13 +49,13 @@ body {
 
 nav {
   display: flex;
-  gap: 50px;
-  margin-top: 10px;
+  gap: 100px;
+  margin-top: 30px;
 }
 
 h1 {
   color: #df7a92;
-  font-size: 3rem;
+  font-size: 5rem;
   text-align: center;
   font-weight: 400;
 }
@@ -42,7 +63,7 @@ h1 {
 h2 {
   font-weight: 400;
   color: #df7a92;
-  font-size: 48px;
+  font-size: 5rem;
   text-align: center;
   margin: 0;
 }
@@ -55,7 +76,16 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   font-family: "Great Vibes", cursive;
-  font-size: 20px;
+  font-size: 1.5rem;
+
+  &:hover {
+    animation-play-state: paused;
+    transform: scale(1.1);
+  }
+}
+
+.action {
+  animation: pulse 1s infinite;
 }
 
 .no {
@@ -66,7 +96,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   font-family: "Great Vibes", cursive;
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 .response {
@@ -74,10 +104,108 @@ h2 {
   text-align: center;
   align-content: space-around;
   justify-content: center;
+
+  & h2 {
+    animation: pulse 1s infinite;
+  }
+
+  & h3 {
+    color: #df7a92;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    font-weight: 400;
+  }
 }
 
 img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
+  margin: 20px;
+}
+
+.message {
+  min-height: 24px;
+  margin: 6px 0;
+  font-size: 1.5rem;
+  /* color: #df7a92; */
+  color: #670301;
+  font-weight: 500;
+}
+
+.message.animate {
+  animation: popIn 0.5s ease;
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  background-color: red;
+  animation: fall 3s linear forwards;
+  opacity: 0.8;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  nav {
+    gap: 20px;
+  }
+
+  img {
+    width: 90%;
+    height: auto;
+  }
+
+  h1,
+  h2 {
+    font-size: 3rem;
+  }
+
+  .yes,
+  .no {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  nav {
+    flex-direction: column;
+  }
 }
