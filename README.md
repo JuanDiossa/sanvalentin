@@ -36,7 +36,7 @@ Este proyecto nació como una práctica para aprender y reforzar conceptos de Ja
 ```
 ├── index.html
 ├── style.css
-└── script.js
+└── main.js
 ```
 
 ---
